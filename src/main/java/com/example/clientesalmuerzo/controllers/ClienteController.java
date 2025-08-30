@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/api/clientes") // Cambiado para no generar conflicto con Thymeleaf
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -47,4 +47,3 @@ public class ClienteController {
         return clienteService.deleteCliente(nombre);
     }
 }
-

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/clientes")
+@RequestMapping("/clientes") // Rutas para la interfaz web
 public class ClienteViewController {
 
     private final ClienteService clienteService;
@@ -25,9 +25,16 @@ public class ClienteViewController {
 
     // Guardar cliente desde formulario
     @PostMapping
-    public String guardarCliente(@ModelAttribute Cliente cliente) {
-        clienteService.addCliente(cliente);
-        return "redirect:/clientes/lista";
+    public String guardarCliente(@ModelAttribute Cliente cliente, Model model) {
+        var response = clienteService.addCliente(cliente);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return "redirect:/clientes/lista";
+        } else {
+            // Si ya existe, mostrar mensaje en formulario
+            model.addAttribute("error", "El cliente ya existe");
+            model.addAttribute("cliente", cliente);
+            return "formulario";
+        }
     }
 
     // Mostrar lista de clientes
