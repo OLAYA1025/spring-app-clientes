@@ -1,7 +1,7 @@
-package com.example.controllers;
+package com.example.clientesalmuerzo.controllers;
 
-import com.example.domain.Cliente;
-import com.example.services.ClienteService;
+import com.example.clientesalmuerzo.domain.Cliente;
+import com.example.clientesalmuerzo.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

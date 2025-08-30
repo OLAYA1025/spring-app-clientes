@@ -1,6 +1,6 @@
-package com.example.services;
+package com.example.clientesalmuerzo.services;
 
-import com.example.domain.Cliente;
+import com.example.clientesalmuerzo.domain.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

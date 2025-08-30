@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.clientesalmuerzo.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     private String nombre;
-    
+
     private String pago;
 
     private String direccion;

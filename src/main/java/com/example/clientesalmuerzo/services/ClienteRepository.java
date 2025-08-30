@@ -1,6 +1,6 @@
-package com.example.services;
+package com.example.clientesalmuerzo.services;
 
-import com.example.domain.Cliente;
+import com.example.clientesalmuerzo.domain.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
