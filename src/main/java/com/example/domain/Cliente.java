@@ -11,11 +11,7 @@ public class Cliente {
 
     @Id
     private String nombre;
-
-    @Column(
-            nullable = false,
-            columnDefinition = "VARCHAR(2) CHECK (pago IN ('si','no'))"
-    )
+    
     private String pago;
 
     private String direccion;
