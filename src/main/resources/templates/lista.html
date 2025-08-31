@@ -45,6 +45,7 @@
             border-radius: 5px;
             cursor: pointer;
             color: white;
+            margin-right: 5px;
         }
         .btn-pago {
             background-color: #28a745;
@@ -92,12 +93,12 @@
             <td th:text="${cliente.pago}"></td>
             <td th:text="${cliente.direccion}"></td>
             <td>
-                <!-- Botón para alternar pago -->
-                <form th:action="@{/clientes/alternar/{nombre}(nombre=${cliente.nombre})}" method="post">
+                <!-- Alternar pago -->
+                <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
                     <button type="submit" class="btn-pago">Alternar Pago</button>
                 </form>
-                <!-- Botón para eliminar cliente -->
+                <!-- Eliminar cliente -->
                 <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="submit" class="btn-eliminar">Eliminar</button>
@@ -112,5 +113,6 @@
 </div>
 </body>
 </html>
+
 
 

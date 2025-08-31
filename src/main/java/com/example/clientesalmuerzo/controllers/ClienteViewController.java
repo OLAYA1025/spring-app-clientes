@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/clientes") // Rutas para la interfaz web
+@RequestMapping("/clientes")
 public class ClienteViewController {
 
     private final ClienteService clienteService;
@@ -16,39 +16,42 @@ public class ClienteViewController {
         this.clienteService = clienteService;
     }
 
-    // Mostrar formulario
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("cliente", new Cliente());
         return "formulario";
     }
 
-    // Guardar cliente desde formulario
     @PostMapping
     public String guardarCliente(@ModelAttribute Cliente cliente, Model model) {
         var response = clienteService.addCliente(cliente);
         if (response.getStatusCode().is2xxSuccessful()) {
             return "redirect:/clientes/lista";
         } else {
-            // Si ya existe, mostrar mensaje en formulario
             model.addAttribute("error", "El cliente ya existe");
             model.addAttribute("cliente", cliente);
             return "formulario";
         }
     }
 
-    // Mostrar lista de clientes
+    // Alternar pago usando PUT
+    @PutMapping("/{nombre}")
+    public String alternarPago(@PathVariable String nombre) {
+        clienteService.updatePago(nombre);
+        return "redirect:/clientes/lista";
+    }
+
+    // Eliminar cliente usando DELETE
+    @DeleteMapping("/{nombre}")
+    public String eliminarCliente(@PathVariable String nombre) {
+        clienteService.deleteCliente(nombre);
+        return "redirect:/clientes/lista";
+    }
+
     @GetMapping("/lista")
     public String mostrarLista(Model model) {
         model.addAttribute("clientes", clienteService.getClientes());
         return "lista";
-    }
-
-    // Alternar pago desde lista
-    @PostMapping("/alternar/{nombre}")
-    public String alternarPago(@PathVariable String nombre) {
-        clienteService.updatePago(nombre);
-        return "redirect:/clientes/lista";
     }
 
     @GetMapping("/totales")
@@ -57,11 +60,5 @@ public class ClienteViewController {
         model.addAttribute("totalPagado", totales.getTotalPagado());
         model.addAttribute("totalNoPagado", totales.getTotalNoPagado());
         return "totales";
-    }
-
-    @DeleteMapping("/{nombre}")
-    public String eliminarCliente(@PathVariable String nombre) {
-        clienteService.deleteCliente(nombre);
-        return "redirect:/clientes/lista";
     }
 }
