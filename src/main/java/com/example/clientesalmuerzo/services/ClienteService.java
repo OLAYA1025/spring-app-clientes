@@ -36,6 +36,8 @@ public class ClienteService {
         if (respuesta.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("el cliente ya existe");
         }
+        cliente.setEntregado("no");
+        cliente.setPago("no");
         clienteRepository.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
