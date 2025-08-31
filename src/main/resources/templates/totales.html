@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Totales de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+        a {
+            display: block;
+            margin-top: 25px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Totales de Clientes</h1>
+    <p>Total recaudado (pagaron): <strong th:text="${totalPagado}">0</strong> COP</p>
+    <p>Total no pagado (usuarios pendientes): <strong th:text="${totalNoPagado}">0</strong></p>
+    <a href="/clientes/lista">Volver a la lista de clientes</a>
+</div>
+</body>
+</html>

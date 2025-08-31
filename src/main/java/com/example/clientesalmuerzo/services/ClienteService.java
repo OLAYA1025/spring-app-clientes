@@ -1,6 +1,7 @@
 package com.example.clientesalmuerzo.services;
 
 import com.example.clientesalmuerzo.domain.Cliente;
+import com.example.clientesalmuerzo.domain.Totales;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +63,20 @@ public class ClienteService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el producto no existe");
     }
 
+
+    public Totales calcularTotales() {
+        int totalPagado = 0;
+        int totalNoPagado = 0;
+
+        for (Cliente c : clienteRepository.findAll()) {
+            if ("si".equalsIgnoreCase(c.getPago())) {
+                totalPagado += 25000;
+            } else {
+                totalNoPagado += 1;
+            }
+        }
+
+        return new Totales(totalPagado, totalNoPagado);
+    }
 
 }
