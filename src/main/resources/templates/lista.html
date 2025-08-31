@@ -93,7 +93,7 @@
             <td th:text="${cliente.direccion}"></td>
             <td>
                 <!-- Botón para alternar pago -->
-                <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
+                <form th:action="@{/clientes/alternar/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
                     <button type="submit" class="btn-pago">Alternar Pago</button>
                 </form>

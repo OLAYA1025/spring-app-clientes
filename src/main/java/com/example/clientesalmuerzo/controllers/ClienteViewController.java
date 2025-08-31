@@ -45,7 +45,7 @@ public class ClienteViewController {
     }
 
     // Alternar pago desde lista
-    @PostMapping("/{nombre}")
+    @PostMapping("/alternar/{nombre}")
     public String alternarPago(@PathVariable String nombre) {
         clienteService.updatePago(nombre);
         return "redirect:/clientes/lista";
