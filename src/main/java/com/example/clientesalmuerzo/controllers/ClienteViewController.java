@@ -50,4 +50,12 @@ public class ClienteViewController {
         clienteService.updatePago(nombre);
         return "redirect:/clientes/lista";
     }
+
+    @GetMapping("/totales")
+    public String mostrarTotales(Model model) {
+        var totales = clienteService.calcularTotales();
+        model.addAttribute("totalPagado", totales.getTotalPagado());
+        model.addAttribute("totalNoPagado", totales.getTotalNoPagado());
+        return "totales";
+    }
 }
