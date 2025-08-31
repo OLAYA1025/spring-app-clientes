@@ -65,6 +65,8 @@ public class ClienteViewController {
         var totales = clienteService.calcularTotales();
         model.addAttribute("totalPagado", totales.getTotalPagado());
         model.addAttribute("totalNoPagado", totales.getTotalNoPagado());
+        model.addAttribute("totalEntregado", totales.getTotalEntregado());
+        model.addAttribute("totalNoEntregado", totales.getTotalNoEntregado());
         return "totales";
     }
 }
