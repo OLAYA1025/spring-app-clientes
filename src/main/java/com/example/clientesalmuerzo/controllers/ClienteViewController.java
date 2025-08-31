@@ -55,13 +55,13 @@ public class ClienteViewController {
         clienteService.deleteCliente(nombre);
         return "redirect:/clientes/lista";
     }
-
+    /*
     @GetMapping("/lista")
     public String mostrarLista(Model model) {
         model.addAttribute("clientes", clienteService.getClientes());
         return "lista";
     }
-
+    */
     @GetMapping("/totales")
     public String mostrarTotales(Model model) {
         var totales = clienteService.calcularTotales();
