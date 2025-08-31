@@ -16,6 +16,10 @@ public class Cliente {
 
     private String direccion;
 
+    private Integer cantidad;
+
+    private String entregado;
+
     public String getNombre() {
         return nombre;
     }
@@ -36,5 +40,21 @@ public class Cliente {
     }
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(String entregado) {
+        this.entregado = entregado;
     }
 }

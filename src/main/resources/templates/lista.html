@@ -84,6 +84,7 @@
             <th>Nombre</th>
             <th>Pago</th>
             <th>Dirección</th>
+            <th>Entregado</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -92,8 +93,14 @@
             <td th:text="${cliente.nombre}"></td>
             <td th:text="${cliente.pago}"></td>
             <td th:text="${cliente.direccion}"></td>
+            <td th:text="${cliente.entregado}"></td>
             <td>
                 <!-- Alternar pago -->
+                <form th:action="@{/clientes/entregado/{nombre}(nombre=${cliente.nombre})}" method="post">
+                    <input type="hidden" name="_method" value="put"/>
+                    <button type="submit" class="btn-entregado">Alternar Entregado</button>
+                </form>
+                <!-- Alternar entregado -->
                 <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
                     <button type="submit" class="btn-pago">Alternar Pago</button>

@@ -37,6 +37,11 @@ public class ClienteController {
         return clienteService.updatePago(nombre);
     }
 
+    @PutMapping("/entregado/{nombre}")
+    public Cliente updateEntregado(@PathVariable String nombre) {
+        return clienteService.updateEntregado(nombre);
+    }
+
     @DeleteMapping("/{nombre}")
     public ResponseEntity<?> deleteCliente(@PathVariable String nombre) {
         return clienteService.deleteCliente(nombre);

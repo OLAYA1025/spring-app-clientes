@@ -41,6 +41,12 @@ public class ClienteViewController {
         return "redirect:/clientes/lista";
     }
 
+    @PutMapping("/entregado/{nombre}")
+    public String alternarEntregado(@PathVariable String nombre) {
+        clienteService.updateEntregado(nombre);
+        return "redirect:/clientes/lista";
+    }
+
     // Eliminar cliente usando DELETE
     @DeleteMapping("/{nombre}")
     public String eliminarCliente(@PathVariable String nombre) {

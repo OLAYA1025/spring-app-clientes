@@ -54,6 +54,14 @@ public class ClienteService {
 
     }
 
+    public Cliente updateEntregado(String nombre) {
+        Cliente cliente = clienteRepository.findById(nombre)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        cliente.setEntregado("si");
+        return clienteRepository.save(cliente);
+
+    }
+
     public ResponseEntity<?> deleteCliente(String nombre) {
         Optional<Cliente> respuesta = clienteRepository.findById(nombre);
         if (respuesta.isPresent()) {
@@ -67,16 +75,22 @@ public class ClienteService {
     public Totales calcularTotales() {
         int totalPagado = 0;
         int totalNoPagado = 0;
-
+        int totalEntregado = 0;
+        int totalNoEntregado = 0;
         for (Cliente c : clienteRepository.findAll()) {
+            if (c.getEntregado().equals("si")) {
+                totalEntregado+= c.getCantidad();
+            }else{
+                totalNoEntregado+= c.getCantidad();
+            }
             if ("si".equalsIgnoreCase(c.getPago())) {
-                totalPagado += 25000;
+                totalPagado += c.getCantidad()*25000;
             } else {
-                totalNoPagado += 1;
+                totalNoPagado += c.getCantidad();
             }
         }
 
-        return new Totales(totalPagado, totalNoPagado);
+        return new Totales(totalPagado, totalNoPagado, totalEntregado, totalNoEntregado);
     }
 
 }
