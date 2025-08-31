@@ -58,4 +58,10 @@ public class ClienteViewController {
         model.addAttribute("totalNoPagado", totales.getTotalNoPagado());
         return "totales";
     }
+
+    @DeleteMapping("/{nombre}")
+    public String eliminarCliente(@PathVariable String nombre) {
+        clienteService.deleteCliente(nombre);
+        return "redirect:/clientes/lista";
+    }
 }
