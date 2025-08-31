@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/clientes")
 public class ClienteViewController {
@@ -68,5 +70,21 @@ public class ClienteViewController {
         model.addAttribute("totalEntregado", totales.getTotalEntregado());
         model.addAttribute("totalNoEntregado", totales.getTotalNoEntregado());
         return "totales";
+    }
+
+    @GetMapping("/lista")
+    public String mostrarLista(@RequestParam(value = "nombre", required = false) String nombre, Model model) {
+        List<Cliente> clientes;
+        if (nombre != null && !nombre.isEmpty()) {
+            // Buscar por nombre parcial
+            clientes = clienteService.getClientes()
+                    .stream()
+                    .filter(c -> c.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                    .toList();
+        } else {
+            clientes = clienteService.getClientes();
+        }
+        model.addAttribute("clientes", clientes);
+        return "lista";
     }
 }

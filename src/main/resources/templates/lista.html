@@ -1,89 +1,183 @@
-<!DOCTYPE html>
+<!DO<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Clientes</title>
     <style>
+        :root{
+            --bg:#f4f6f8;
+            --card:#ffffff;
+            --primary:#007bff;
+            --muted:#6c757d;
+            --success:#28a745;
+            --danger:#dc3545;
+            --shadow: 0 6px 18px rgba(15, 15, 15, 0.08);
+            --radius:12px;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 16px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding-top: 50px;
         }
+
         .container {
-            background-color: white;
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 750px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        table {
             width: 100%;
+            max-width: 980px;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        header {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:16px;
+            margin-bottom:18px;
+        }
+        header h1 {
+            margin:0;
+            font-size:20px;
+            color:#222;
+        }
+        .controls {
+            display:flex;
+            gap:12px;
+            align-items:center;
+        }
+
+        .search-form {
+            display:flex;
+            gap:8px;
+            align-items:center;
+            background:#f1f5f9;
+            padding:6px;
+            border-radius:8px;
+        }
+        .search-form input[type="text"]{
+            border: none;
+            background: transparent;
+            outline: none;
+            padding:8px;
+            width:260px;
+            font-size:14px;
+            color:#222;
+        }
+        .search-form button {
+            padding:8px 12px;
+            background:var(--primary);
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        }
+        .actions-top a {
+            display:inline-block;
+            padding:8px 12px;
+            background:transparent;
+            color:var(--primary);
+            text-decoration:none;
+            border-radius:8px;
+            border:1px solid rgba(0,123,255,0.12);
+            font-size:14px;
+        }
+
+        table {
+            width:100%;
             border-collapse: collapse;
+            margin-top: 8px;
+            font-size:14px;
+        }
+        thead th {
+            text-align:center;
+            padding:12px 10px;
+            background: linear-gradient(180deg, var(--primary), #0069d9);
+            color:#fff;
+            font-weight:600;
+            border-top-left-radius:8px;
+            border-top-right-radius:8px;
+        }
+        tbody tr {
+            background: white;
+        }
+        tbody tr + tr td {
+            border-top: 1px solid #eee;
         }
         th, td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+            padding:10px;
+            text-align:center;
         }
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: white;
-            margin-right: 5px;
-        }
-        .btn-pago {
-            background-color: #28a745;
-        }
-        .btn-pago:hover {
-            background-color: #218838;
-        }
-        .btn-eliminar {
-            background-color: #dc3545;
-        }
-        .btn-eliminar:hover {
-            background-color: #c82333;
-        }
-        .btn-entregado {
-            background-color: #28a745;
-        }
-        .btn-entregado:hover {
-            background-color: #218838;
 
+        td.name-col {
+            text-align:left;
+            padding-left:18px;
         }
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #007bff;
-            text-decoration: none;
+
+        .muted {
+            color:var(--muted);
+            font-size:13px;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .badge {
+            display:inline-block;
+            padding:6px 10px;
+            border-radius:999px;
+            font-weight:600;
+            font-size:13px;
         }
-        form {
-            display: inline;
+        .badge-paid { background:#e6f7ea; color: #13753a; }
+        .badge-unpaid { background:#fff1f0; color:#7a1f1f; }
+        .badge-delivered { background:#e9f8f0; color:#146c43; }
+        .badge-pending { background:#fff7e6; color:#7a5a00; }
+
+        .btn {
+            padding:6px 10px;
+            border-radius:8px;
+            border:none;
+            cursor:pointer;
+            color:white;
+            font-weight:600;
+            font-size:13px;
+        }
+        .btn-pago { background: var(--success); }
+        .btn-pago:hover { filter:brightness(.95); }
+        .btn-entregado { background: #17a2b8; } /* cyan */
+        .btn-entregado:hover { filter:brightness(.95); }
+        .btn-eliminar { background: var(--danger); }
+        .btn-eliminar:hover { filter:brightness(.95); }
+
+        .actions form { display:inline-block; margin:0 4px; }
+
+        @media (max-width:760px){
+            header { flex-direction:column; align-items:stretch; gap:12px; }
+            .search-form input[type="text"]{ width: 140px; }
+            th, td { font-size:13px; padding:8px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Lista de Clientes</h1>
+    <header>
+        <h1>Lista de Clientes</h1>
+        <div class="controls">
+            <form class="search-form" th:action="@{/clientes/lista}" method="get">
+                <input type="text" name="nombre" placeholder="Buscar por nombre..." th:value="${param.nombre}">
+                <button type="submit">Buscar</button>
+            </form>
+            <div class="actions-top">
+                <a href="/clientes/formulario">Agregar</a>
+            </div>
+        </div>
+    </header>
 
     <table>
         <thead>
@@ -91,44 +185,72 @@
             <th>Nombre</th>
             <th>Pago</th>
             <th>Dirección</th>
-            <th>cantidad</th>
+            <th>Cantidad</th>
             <th>Entregado</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.nombre}"></td>
-            <td th:text="${cliente.pago}"></td>
-            <td th:text="${cliente.direccion}"></td>
-            <td th:text="${cliente.cantidad}"></td>
-            <td th:text="${cliente.entregado}"></td>
+            <td class="name-col">
+                <div th:text="${cliente.nombre}">Nombre</div>
+                <div class="muted" th:text="${cliente.direccion}">Dirección</div>
+            </td>
+
             <td>
-                <!-- Alternar pago -->
+                <span th:if="${cliente.pago != null and #strings.equalsIgnoreCase(cliente.pago,'si')}"
+                      class="badge badge-paid">Pagó</span>
+                <span th:if="${cliente.pago == null or !#strings.equalsIgnoreCase(cliente.pago,'si')}"
+                      class="badge badge-unpaid">No pagó</span>
+            </td>
+
+            <td th:text="${cliente.direccion}">Dirección</td>
+
+            <td th:text="${cliente.cantidad}">0</td>
+
+            <td>
+                <span th:if="${cliente.entregado != null and cliente.entregado == true}"
+                      class="badge badge-delivered">Entregado</span>
+                <span th:if="${cliente.entregado == null or cliente.entregado == false}"
+                      class="badge badge-pending">Pendiente</span>
+            </td>
+
+            <td class="actions">
+                <!-- Alternar entregado -->
                 <form th:action="@{/clientes/entregado/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
-                    <button type="submit" class="btn-entregado">Alternar Entregado</button>
+                    <button type="submit" class="btn btn-entregado">Alternar Entregado</button>
                 </form>
-                <!-- Alternar entregado -->
+
+                <!-- Alternar pago -->
                 <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
-                    <button type="submit" class="btn-pago">Alternar Pago</button>
+                    <button type="submit" class="btn btn-pago">Alternar Pago</button>
                 </form>
+
                 <!-- Eliminar cliente -->
-                <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
+                <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post"
+                      onsubmit="return confirm('¿Eliminar cliente ' + /*[[${cliente.nombre}]]*/'?' );">
                     <input type="hidden" name="_method" value="delete"/>
-                    <button type="submit" class="btn-eliminar">Eliminar</button>
+                    <button type="submit" class="btn btn-eliminar">Eliminar</button>
                 </form>
             </td>
+        </tr>
+
+        <!-- Mensaje si no hay clientes -->
+        <tr th:if="${#lists.isEmpty(clientes)}">
+            <td colspan="6" style="padding:24px; color:var(--muted);">No hay clientes.</td>
         </tr>
         </tbody>
     </table>
 
-    <a href="/clientes/formulario">Agregar nuevo cliente</a>
-    <a href="/clientes/totales">Ver totales</a>
+    <div style="margin-top:16px; text-align:right;">
+        <a href="/clientes/totales" style="color:var(--primary); text-decoration:none;">Ver totales</a>
+    </div>
 </div>
 </body>
 </html>
+
 
 
 
