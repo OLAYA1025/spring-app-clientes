@@ -28,7 +28,7 @@
             margin-top: 10px;
             font-weight: bold;
         }
-        input[type="text"] {
+        input[type="text"], select {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -69,8 +69,11 @@
         <label>Nombre:</label>
         <input type="text" th:field="*{nombre}" required/>
 
-        <label>Pago (si/no):</label>
-        <input type="text" th:field="*{pago}" required/>
+        <label>Pago:</label>
+        <select th:field="*{pago}" required>
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
 
         <label>Dirección:</label>
         <input type="text" th:field="*{direccion}" required/>
@@ -79,7 +82,6 @@
     </form>
 
     <a href="/clientes/lista">Ver lista de clientes</a>
-    <a href="/clientes/totales">Ver totales</a>
 </div>
 </body>
 </html>
