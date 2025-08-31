@@ -46,7 +46,7 @@
             border: none; background: transparent; outline: none; padding:8px; width:260px; font-size:14px; color:#222;
         }
         .search-form button {
-            padding:8px 12px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;
+            padding:8px 12px; background:transparent; color:var(--muted); border:none; border-radius:8px; cursor:pointer; font-weight:600;
         }
         .actions-top a {
             display:inline-block; padding:8px 12px; background:transparent; color:var(--primary); text-decoration:none;
@@ -109,7 +109,7 @@
         </thead>
         <tbody id="clientesTbody">
         <tr th:each="cliente : ${clientes}"
-            th:attr="data-nombre=${cliente.nombre}, data-direccion=${cliente.direccion}">
+            th:attr="data-nombre=${cliente.nombre}, data-direccion=${cliente.direccion}, data-entregado=${cliente.entregado}">
             <td class="name-col">
                 <div th:text="${cliente.nombre}">Nombre</div>
                 <div class="muted" th:text="${cliente.direccion}">Dirección</div>
@@ -127,9 +127,9 @@
             <td th:text="${cliente.cantidad}">0</td>
 
             <td>
-                <span th:if="${cliente.entregado != null and cliente.entregado == true}"
+                <span th:if="${cliente.entregado != null and #strings.equalsIgnoreCase(cliente.entregado,'si')}"
                       class="badge badge-delivered">Entregado</span>
-                <span th:if="${cliente.entregado == null or cliente.entregado == false}"
+                <span th:if="${cliente.entregado == null or !#strings.equalsIgnoreCase(cliente.entregado,'si')}"
                       class="badge badge-pending">Pendiente</span>
             </td>
 
@@ -191,7 +191,6 @@
         function filter(value){
             const q = normalize(value.trim());
             if(q === ''){
-                // mostrar todos
                 rows.forEach(r => r.style.display = '');
                 noResults.style.display = 'none';
                 return;
@@ -200,8 +199,7 @@
             rows.forEach(r => {
                 const nombre = normalize(r.getAttribute('data-nombre'));
                 const direccion = normalize(r.getAttribute('data-direccion'));
-                // puedes añadir más campos a buscar (ej: direccion)
-                const match = nombre.includes(q) || direccion.includes(q);
+                const match = (nombre && nombre.includes(q)) || (direccion && direccion.includes(q));
                 r.style.display = match ? '' : 'none';
                 if(match) visible++;
             });
@@ -227,5 +225,3 @@
 </script>
 </body>
 </html>
-
-

@@ -59,9 +59,15 @@ public class ClienteService {
     public Cliente updateEntregado(String nombre) {
         Cliente cliente = clienteRepository.findById(nombre)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        cliente.setEntregado("si");
-        return clienteRepository.save(cliente);
 
+        String actual = cliente.getEntregado();
+        if ("si".equalsIgnoreCase(actual)) {
+            cliente.setEntregado("no");
+        } else {
+            cliente.setEntregado("si");
+        }
+
+        return clienteRepository.save(cliente);
     }
 
     public ResponseEntity<?> deleteCliente(String nombre) {
