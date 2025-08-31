@@ -1,4 +1,4 @@
-<!DO<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -14,9 +14,7 @@
             --shadow: 0 6px 18px rgba(15, 15, 15, 0.08);
             --radius:12px;
         }
-
         * { box-sizing: border-box; }
-
         body {
             font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
             background-color: var(--bg);
@@ -26,7 +24,6 @@
             justify-content: center;
             align-items: flex-start;
         }
-
         .container {
             width: 100%;
             max-width: 980px;
@@ -35,7 +32,6 @@
             padding: 24px;
             box-shadow: var(--shadow);
         }
-
         header {
             display:flex;
             align-items:center;
@@ -43,120 +39,40 @@
             gap:16px;
             margin-bottom:18px;
         }
-        header h1 {
-            margin:0;
-            font-size:20px;
-            color:#222;
-        }
-        .controls {
-            display:flex;
-            gap:12px;
-            align-items:center;
-        }
-
-        .search-form {
-            display:flex;
-            gap:8px;
-            align-items:center;
-            background:#f1f5f9;
-            padding:6px;
-            border-radius:8px;
-        }
+        header h1 { margin:0; font-size:20px; color:#222; }
+        .controls { display:flex; gap:12px; align-items:center; }
+        .search-form { display:flex; gap:8px; align-items:center; background:#f1f5f9; padding:6px; border-radius:8px; }
         .search-form input[type="text"]{
-            border: none;
-            background: transparent;
-            outline: none;
-            padding:8px;
-            width:260px;
-            font-size:14px;
-            color:#222;
+            border: none; background: transparent; outline: none; padding:8px; width:260px; font-size:14px; color:#222;
         }
         .search-form button {
-            padding:8px 12px;
-            background:var(--primary);
-            color:white;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            font-weight:600;
+            padding:8px 12px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;
         }
         .actions-top a {
-            display:inline-block;
-            padding:8px 12px;
-            background:transparent;
-            color:var(--primary);
-            text-decoration:none;
-            border-radius:8px;
-            border:1px solid rgba(0,123,255,0.12);
-            font-size:14px;
+            display:inline-block; padding:8px 12px; background:transparent; color:var(--primary); text-decoration:none;
+            border-radius:8px; border:1px solid rgba(0,123,255,0.12); font-size:14px;
         }
-
-        table {
-            width:100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-            font-size:14px;
-        }
+        table { width:100%; border-collapse: collapse; margin-top: 8px; font-size:14px; }
         thead th {
-            text-align:center;
-            padding:12px 10px;
-            background: linear-gradient(180deg, var(--primary), #0069d9);
-            color:#fff;
-            font-weight:600;
-            border-top-left-radius:8px;
-            border-top-right-radius:8px;
+            text-align:center; padding:12px 10px; background: linear-gradient(180deg, var(--primary), #0069d9);
+            color:#fff; font-weight:600; border-top-left-radius:8px; border-top-right-radius:8px;
         }
-        tbody tr {
-            background: white;
-        }
-        tbody tr + tr td {
-            border-top: 1px solid #eee;
-        }
-        th, td {
-            padding:10px;
-            text-align:center;
-        }
-
-        td.name-col {
-            text-align:left;
-            padding-left:18px;
-        }
-
-        .muted {
-            color:var(--muted);
-            font-size:13px;
-        }
-
-        .badge {
-            display:inline-block;
-            padding:6px 10px;
-            border-radius:999px;
-            font-weight:600;
-            font-size:13px;
-        }
+        tbody tr { background: white; }
+        tbody tr + tr td { border-top: 1px solid #eee; }
+        th, td { padding:10px; text-align:center; }
+        td.name-col { text-align:left; padding-left:18px; }
+        .muted { color:var(--muted); font-size:13px; }
+        .badge { display:inline-block; padding:6px 10px; border-radius:999px; font-weight:600; font-size:13px; }
         .badge-paid { background:#e6f7ea; color: #13753a; }
         .badge-unpaid { background:#fff1f0; color:#7a1f1f; }
         .badge-delivered { background:#e9f8f0; color:#146c43; }
         .badge-pending { background:#fff7e6; color:#7a5a00; }
-
-        .btn {
-            padding:6px 10px;
-            border-radius:8px;
-            border:none;
-            cursor:pointer;
-            color:white;
-            font-weight:600;
-            font-size:13px;
-        }
-        .btn-pago { background: var(--success); }
-        .btn-pago:hover { filter:brightness(.95); }
-        .btn-entregado { background: #17a2b8; } /* cyan */
-        .btn-entregado:hover { filter:brightness(.95); }
-        .btn-eliminar { background: var(--danger); }
-        .btn-eliminar:hover { filter:brightness(.95); }
-
+        .btn { padding:6px 10px; border-radius:8px; border:none; cursor:pointer; color:white; font-weight:600; font-size:13px; }
+        .btn-pago { background: var(--success); } .btn-pago:hover { filter:brightness(.95); }
+        .btn-entregado { background: #17a2b8; } .btn-entregado:hover { filter:brightness(.95); }
+        .btn-eliminar { background: var(--danger); } .btn-eliminar:hover { filter:brightness(.95); }
         .actions form { display:inline-block; margin:0 4px; }
-
+        #no-results { padding:24px; color:var(--muted); text-align:center; }
         @media (max-width:760px){
             header { flex-direction:column; align-items:stretch; gap:12px; }
             .search-form input[type="text"]{ width: 140px; }
@@ -169,10 +85,11 @@
     <header>
         <h1>Lista de Clientes</h1>
         <div class="controls">
-            <form class="search-form" th:action="@{/clientes/lista}" method="get">
-                <input type="text" name="nombre" placeholder="Buscar por nombre..." th:value="${param.nombre}">
-                <button type="submit">Buscar</button>
-            </form>
+            <!-- input sin botón obligatorio (se usa para filtrar en tiempo real) -->
+            <div class="search-form" role="search" aria-label="Buscar clientes">
+                <input id="searchInput" type="text" name="nombre" placeholder="Buscar por nombre..." th:value="${param.nombre}">
+                <button id="clearBtn" type="button" title="Limpiar">✕</button>
+            </div>
             <div class="actions-top">
                 <a href="/clientes/formulario">Agregar</a>
             </div>
@@ -190,8 +107,9 @@
             <th>Acciones</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="cliente : ${clientes}">
+        <tbody id="clientesTbody">
+        <tr th:each="cliente : ${clientes}"
+            th:attr="data-nombre=${cliente.nombre}, data-direccion=${cliente.direccion}">
             <td class="name-col">
                 <div th:text="${cliente.nombre}">Nombre</div>
                 <div class="muted" th:text="${cliente.direccion}">Dirección</div>
@@ -216,19 +134,16 @@
             </td>
 
             <td class="actions">
-                <!-- Alternar entregado -->
                 <form th:action="@{/clientes/entregado/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
                     <button type="submit" class="btn btn-entregado">Alternar Entregado</button>
                 </form>
 
-                <!-- Alternar pago -->
                 <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post">
                     <input type="hidden" name="_method" value="put"/>
                     <button type="submit" class="btn btn-pago">Alternar Pago</button>
                 </form>
 
-                <!-- Eliminar cliente -->
                 <form th:action="@{/clientes/{nombre}(nombre=${cliente.nombre})}" method="post"
                       onsubmit="return confirm('¿Eliminar cliente ' + /*[[${cliente.nombre}]]*/'?' );">
                     <input type="hidden" name="_method" value="delete"/>
@@ -237,7 +152,10 @@
             </td>
         </tr>
 
-        <!-- Mensaje si no hay clientes -->
+        <!-- fila de "no results" (oculta por defecto) -->
+        <tr id="no-results" style="display:none;"><td colspan="6">No hay clientes que coincidan.</td></tr>
+
+        <!-- mensaje si la lista está vacía al cargar -->
         <tr th:if="${#lists.isEmpty(clientes)}">
             <td colspan="6" style="padding:24px; color:var(--muted);">No hay clientes.</td>
         </tr>
@@ -248,9 +166,66 @@
         <a href="/clientes/totales" style="color:var(--primary); text-decoration:none;">Ver totales</a>
     </div>
 </div>
+
+<script>
+    // Debounce rápido
+    function debounce(fn, delay){
+        let t;
+        return (...args) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), delay);
+        };
+    }
+
+    (function(){
+        const input = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const tbody = document.getElementById('clientesTbody');
+        const rows = Array.from(tbody.querySelectorAll('tr[data-nombre]'));
+        const noResults = document.getElementById('no-results');
+
+        function normalize(s){
+            return (s || '').toString().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        }
+
+        function filter(value){
+            const q = normalize(value.trim());
+            if(q === ''){
+                // mostrar todos
+                rows.forEach(r => r.style.display = '');
+                noResults.style.display = 'none';
+                return;
+            }
+            let visible = 0;
+            rows.forEach(r => {
+                const nombre = normalize(r.getAttribute('data-nombre'));
+                const direccion = normalize(r.getAttribute('data-direccion'));
+                // puedes añadir más campos a buscar (ej: direccion)
+                const match = nombre.includes(q) || direccion.includes(q);
+                r.style.display = match ? '' : 'none';
+                if(match) visible++;
+            });
+            noResults.style.display = visible ? 'none' : '';
+        }
+
+        const debouncedFilter = debounce((e) => filter(e.target.value), 120);
+
+        input.addEventListener('input', debouncedFilter);
+
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            filter('');
+            input.focus();
+        });
+
+        // Si vienes con ?nombre=xxx, aplicar filtro al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            const initial = input.value || '';
+            if(initial.trim() !== '') filter(initial);
+        });
+    })();
+</script>
 </body>
 </html>
-
-
 
 

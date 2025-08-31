@@ -73,18 +73,8 @@ public class ClienteViewController {
     }
 
     @GetMapping("/lista")
-    public String mostrarLista(@RequestParam(value = "nombre", required = false) String nombre, Model model) {
-        List<Cliente> clientes;
-        if (nombre != null && !nombre.isEmpty()) {
-            // Buscar por nombre parcial
-            clientes = clienteService.getClientes()
-                    .stream()
-                    .filter(c -> c.getNombre().toLowerCase().contains(nombre.toLowerCase()))
-                    .toList();
-        } else {
-            clientes = clienteService.getClientes();
-        }
-        model.addAttribute("clientes", clientes);
+    public String mostrarLista(Model model) {
+        model.addAttribute("clientes", clienteService.getClientes());
         return "lista";
     }
 }
